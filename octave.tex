@@ -1,0 +1,122 @@
+\documentclass{article}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{semantic-markup}
+\usepackage{octave}
+\usepackage{fancyvrb}
+\frenchspacing
+\usepackage[
+    pdftitle={The octave Package for Typesetting Musical Pitches with Octave
+    Designations},
+    pdfauthor={Andrew A. Cashner},
+    pdfsubject={LaTeX package},
+    pdfkeywords={LaTeX, music, musicology, humanities}
+]{hyperref}
+
+\title{The \code{octave} Package for Typesetting Musical Pitches with Octave
+Designations}
+\author{Andrew A. Cashner\thanks{%
+    \href{mailto:andrewacashner@gmail.com}
+    {\nolinkurl{andrewacashner@gmail.com}}%
+    }%
+}
+
+\begin{document}
+\maketitle
+
+There are two standard ways of indicating the octave of a musical pitch:
+\begin{enumerate}
+    \item The Helmholtz system, which uses subscript numerals after the pitch
+        letter name, where \soCalled{middle C} is \pitch{C}{4}
+    \item {\octaveprimes
+        The traditional system, which uses upper- and lowercase letters followed
+        by prime (tick) marks, where \soCalled{middle C} is \pitch{C}{4} and
+        an octave higher is \pitch{C}{5}.}
+\end{enumerate}
+
+This package allows you to typeset pitch names conveniently using either method
+(or even switching between) without worrying about typography, with a simple,
+semantically meaningful interface.
+Authors can write their documents without worrying about which system of
+nomenclature their editor or press will prefer.
+Simply changing the option with which the package is called will change the
+display of all the pitches in the document that have been written with this
+package's commands.
+
+\tableofcontents 
+
+\section{Package Options}
+
+\begin{center}
+    \begin{tabular}{ll}
+        \code{number}   & (Default) Use Helmholtz numbers \\
+        \code{prime}    & Use the traditional system with prime/tick marks \\
+    \end{tabular}
+\end{center}
+
+To use octave numbers, just add \verb|\usepackage{octave}| to your preamble. 
+To use the traditional system, write \verb|\usepackage[prime]{octave}| instead.
+
+
+
+\section{Switching Systems within One Document}
+
+At any time, you can change from one system to the other.
+
+\begin{center}
+\begin{tabular}{ll}
+    \verb|\octaveprimes|    
+        & Switch to the traditional system (prime/tick marks) \\
+    \verb|\octavenumbers|   
+        & Switch to the Helmholtz system (numbers) \\
+\end{tabular}
+\end{center}
+
+\section{Style}
+
+The default setup (stored in the command \verb|\pitchfont|) is for pitch letters
+and numbers in the Helmholtz system to be in the normal font, while pitch
+letters and prime marks are in italic.  You can change this, for example:
+
+\verb|\renewcommand{\pitchfont}{\mdseries}|.
+
+\section{Entering Pitch Names}
+
+To enter a pitch name, use the \verb|\pitch| command.
+It takes three arguments:
+\begin{enumerate}
+    \item (Mandatory) Letter name of the pitch: Can be upper- or lowercase; the
+        package will adjust the case as necessary
+    \item (Optional, in square brackets) Accidental command, e.g., \verb|$\sharp$| or \verb|\sh|
+        from the \code{semantic-markup} package
+    \item (Mandatory) Number of the pitch in the Helmholtz system
+\end{enumerate}
+
+Yes, the package requires you to use the numbered system, even if you want the
+output to be in the traditional system. 
+Thus middle C is \verb|\pitch{C}{4}|, and an octave and a semitone above that is
+\verb|\pitch{C}[\sh]{5}| (using the \code{semantic-markup} package for the
+accidental).
+
+
+\section{Table of Octave Designations in the Two Systems}
+
+The package also provides the \verb|\octavetable| which displays a comparison
+of the two systems, shown in table~\ref{octavetable}.
+
+\begin{table}
+    \caption{Pitch designations in traditional (\code{prime}) and Helmholts
+    (\code{number}) systems}
+    \label{octavetable}
+    \begin{center}
+    \octavetable
+    \end{center}
+\end{table}
+
+\section{Code}
+
+\VerbatimInput{octave.sty}
+
+\end{document}
